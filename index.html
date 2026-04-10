@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 練習範例目錄</title>
+    <style>
+        body {
+            font-family: "Microsoft JhengHei", Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            background-color: #eef2f7; /* Lighter, modern background */
+            display: flex; /* Use flexbox for overall layout */
+            justify-content: center;
+            align-items: flex-start; /* Align to top */
+            min-height: 100vh; /* Full viewport height */
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column; /* Stack header, nav, main vertically */
+            width: 100%;
+            max-width: 1200px; /* Max width for content */
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden; /* For rounded corners */
+        }
+
+        header {
+            background-color: #34495e; /* Darker header */
+            color: white;
+            padding: 25px 40px;
+            text-align: center;
+            border-bottom: 1px solid #42b983;
+        }
+
+        h1 {
+            color: white; /* Title color */
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 2.2em;
+            border-bottom: none; /* Remove previous border */
+        }
+
+        .student-info {
+            font-size: 1em;
+            color: #bdc3c7;
+            margin-bottom: 0;
+        }
+
+        .editable-id {
+            cursor: text;
+            border-bottom: 1px dashed #42b983;
+            padding: 2px 8px;
+            transition: all 0.3s ease;
+        }
+        .editable-id:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+            border-bottom: 1px solid #ffffff;
+            border-radius: 4px;
+        }
+
+        nav {
+            background-color: #f8f9fa; /* Light background for nav */
+            padding: 20px 40px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex; /* Horizontal menu */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            gap: 10px; /* Space between menu items */
+            justify-content: center;
+        }
+
+        li {
+            background: #ffffff;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            flex-grow: 1; /* Allow items to grow */
+            min-width: 180px; /* Minimum width for each item */
+        }
+
+        li:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        a {
+            text-decoration: none;
+            color: #35495e;
+            font-weight: bold;
+            display: flex; /* Use flex for content alignment inside link */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 15px 10px;
+            text-align: center;
+            height: 100%; /* Make link fill li */
+            box-sizing: border-box;
+            border-radius: 6px; /* Match li border-radius */
+        }
+
+        a:hover {
+            color: #42b983;
+            background-color: #e8f5e9; /* Light green background on hover */
+        }
+
+        a.active {
+            background-color: #42b983; /* Active link background */
+            color: white;
+            box-shadow: 0 2px 10px rgba(66, 185, 131, 0.4);
+        }
+
+        a.active .ex-num {
+            color: rgba(255, 255, 255, 0.8); /* Lighter number for active state */
+        }
+
+        .ex-num {
+            font-size: 0.9em;
+            color: #888;
+            display: block;
+            margin-bottom: 5px;
+            font-weight: normal;
+        }
+
+        main.iframe-container {
+            flex-grow: 1; /* Allow iframe container to take remaining space */
+            padding: 20px;
+            background-color: #fdfdfd;
+            display: flex;
+            flex-direction: column;
+            min-height: 600px; /* Minimum height for the iframe area */
+        }
+
+        #example-iframe {
+            width: 100%;
+            flex-grow: 1; /* Make iframe fill its container */
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Vue.js 學習歷程目錄</h1>
+            <p class="student-info">學號：<span class="editable-id" contenteditable="true" id="student-id" spellcheck="false">請點擊輸入學號</span></p>
+        </header>
+
+        <nav>
+            <ul id="menu-list">
+                <li><a href="#" data-src="ex1/index.html"><span class="ex-num">範例 1</span> 第一個 Vue 頁面 (計數器)</a></li>
+                <li><a href="#" data-src="ex2/index.html"><span class="ex-num">範例 2</span> 資料顯示與插值 (Interpolation)</a></li>
+                <li><a href="#" data-src="ex3/index.html"><span class="ex-num">範例 3</span> 事件處理與方法 (Methods)</a></li>
+                <li><a href="#" data-src="ex4/index.html"><span class="ex-num">範例 4</span> 雙向資料綁定 (v-model)</a></li>
+                <li><a href="#" data-src="ex5/index.html"><span class="ex-num">範例 5</span> 條件渲染 (v-if / v-else)</a></li>
+                <li><a href="#" data-src="ex6/index.html"><span class="ex-num">範例 6</span> 列表渲染 (v-for)</a></li>
+                <li><a href="#" data-src="ex7/index.html"><span class="ex-num">範例 7</span> 計算屬性 (Computed)</a></li>
+                <li><a href="#" data-src="ex8/index.html"><span class="ex-num">範例 8</span> 動態樣式與 Class 綁定</a></li>
+                <li><a href="#" data-src="ex9/index.html"><span class="ex-num">範例 9</span> 綜合範例練習</a></li>
+            </ul>
+        </nav>
+
+        <main class="iframe-container">
+            <iframe id="example-iframe" src="ex1/index.html" frameborder="0"></iframe>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuList = document.getElementById('menu-list');
+            const exampleIframe = document.getElementById('example-iframe');
+            const studentIdSpan = document.getElementById('student-id');
+            const placeholder = "請點擊輸入學號";
+
+            // 從 LocalStorage 載入學號
+            const savedId = localStorage.getItem('vue-practice-sid');
+            if (savedId && savedId !== placeholder) studentIdSpan.textContent = savedId;
+
+            // 點擊進入編輯時，如果是提示文字則清空
+            studentIdSpan.addEventListener('focus', () => {
+                if (studentIdSpan.textContent === placeholder) {
+                    studentIdSpan.textContent = "";
+                }
+            });
+
+            // 離開編輯時，如果沒填寫則恢復提示文字，有填寫則儲存
+            studentIdSpan.addEventListener('blur', () => {
+                const val = studentIdSpan.textContent.trim();
+                if (val === "") {
+                    studentIdSpan.textContent = placeholder;
+                    localStorage.removeItem('vue-practice-sid');
+                } else {
+                    localStorage.setItem('vue-practice-sid', val);
+                }
+            });
+
+            menuList.addEventListener('click', (event) => {
+                const target = event.target.closest('a'); // Find the closest 'a' tag
+                if (target && target.dataset.src) {
+                    event.preventDefault(); // Prevent default link behavior
+                    exampleIframe.src = target.dataset.src;
+
+                    // Optional: Add active class to highlight current selection
+                    const currentActive = menuList.querySelector('.active');
+                    if (currentActive) {
+                        currentActive.classList.remove('active');
+                    }
+                    target.classList.add('active');
+                }
+            });
+
+            // Set initial active state for the first item
+            const firstLink = menuList.querySelector('li:first-child a');
+            if (firstLink) {
+                firstLink.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
